@@ -1,0 +1,102 @@
+/* default schrift für das ganze dokument */
+body, td, tbody {font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; color:#000000; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px}
+
+textarea {font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px;}
+select {font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px;width:120px;}
+input {font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px;} 
+.h16 {height:16px; line-height:9px}
+
+.Auswahl { background-color:#dff; width:300px; border:6px solid #ddd; }
+
+.txtbld {font-weight:bold;}
+.txtpad5 { padding-left:5px; padding-right:5px;}
+.txt11pad5 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#000000; padding-left:5px; padding-right:5px;}
+.txt10bld { font-weight:bold; font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; color:#000000;}
+.txt10 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; color:#000000;}
+.txt11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#000000;}
+.txt12 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:12px; color:#000000;}
+.txtrot10 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; color:#B11E1D;}
+.txtrot36 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:36px; color:#FF0000;}
+.txtrot11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#B11E1D;}
+.txtsrot11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#FF0000; font-weight:bold;}
+.txtblue10 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; color:#00105A;}
+.txtblue11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#00105A; font-weight:bold;}
+.txtblue12 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:12px; color:#00105A;}
+.txtblack14 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:14px; color:#000000;}
+.txtblack12 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:12px; color:#000000;}
+.txtkipp12 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:12px; color:#000000; writing-mode: tb-rl;}
+.txtbluebld11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#00105A; font-weight:bold;}
+.txtweiss11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#FFFFFF;}
+.txtweiss15 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:15px; color:#FFFFFF;}
+.txtweiss9 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:9px; color:#FFFFFF;}
+.txtweissbld11 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#FFFFFF; font-weight:bold;}
+.txt11b10h2 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#000000; padding-left:10px; padding-right:10px; padding-top:2px; padding-bottom:2px;}
+.txt11b10h7 { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#000000; padding-left:10px; padding-right:10px; padding-top:7px; padding-bottom:7px;}
+sup { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; font-weight:bold;}
+sub { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:10px; font-weight:bold;}
+.tfag td { font-family:Arial, Verdana, Helvetica, sans-serif; font-size:11px; color:#000000; background-color:#FFFFFF; padding-left:5px; padding-right:5px;}
+
+/* Farben - Hintergrund */
+.bgrot {background-color:#B11E1D;}
+.bgrosa {background-color:#E9B9B9;}
+.bgweiss {background-color:#FFFFFF;}
+.bgblau00 {background-color:#EEF3F8;}
+.bgblau01 {background-color:#D1E0F0;}
+.bgblau02 {background-color:#90BDEF;}
+.bgblau03 {background-color:#315D95;}
+.bgblau04 {background-color:#0D1D7C;}
+.bgblau05 {background-color:#000099;}
+.bgblau06 {background-color:#B5D0F0;}
+.bgblau07 {background-color:#63A5D6;}
+.bgblau08 {background-color:#C0DEF4;}
+.bgblau09 {background-color:#CEE5F4;}
+.bgblau10 {background-color:#4077AC;}
+.bgblau11 {background-color:#E7F0F7;}
+
+
+/* Farben - Text */
+.weiss {color:#FFFFFF;}
+.grau {color:#6D6D6D;}
+
+
+/* Textlink: schwarz, für alle grössen */
+A:LINK { color:#000000; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; }
+A:VISITED{ color:#000000; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A:ACTIVE { color:#000000; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A:HOVER { color:#000000; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; }
+
+/* Textlink: weiss, für alle grössen */
+A.weisslink:LINK { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; }
+A.weisslink:VISITED{ color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.weisslink:ACTIVE { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.weisslink:HOVER { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; }
+
+/* Textlink: weiss, fett, für alle grössen */
+A.weisslinkbld:LINK { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.weisslinkbld:VISITED{ color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.weisslinkbld:ACTIVE { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.weisslinkbld:HOVER { color:#FFFFFF; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; font-weight:bold;}
+
+/* Textlink: rot, für alle grössen */
+A.rotlink:LINK { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; }
+A.rotlink:VISITED{ color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.rotlink:ACTIVE { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.rotlink:HOVER { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; }
+
+/* Textlink: rot + fett für alle grössen */
+A.rotlinkbld:LINK { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.rotlinkbld:VISITED{ color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.rotlinkbld:ACTIVE { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.rotlinkbld:HOVER { color:#B11E1D; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; font-weight:bold;}
+
+/* Textlink: blau, für alle grössen */
+A.bluelink:LINK { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; }
+A.bluelink:VISITED{ color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.bluelink:ACTIVE { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none;}
+A.bluelink:HOVER { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; }
+
+/* Textlink: blau, fett, für alle grössen */
+A.bluelinkbld:LINK { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.bluelinkbld:VISITED{ color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.bluelinkbld:ACTIVE { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:none; font-weight:bold;}
+A.bluelinkbld:HOVER { color:#00105A; font-family:Arial, Verdana, Helvetica, sans-serif; text-decoration:underline; font-weight:bold;}
