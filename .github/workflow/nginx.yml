@@ -1,0 +1,25 @@
+on: 
+  push: 
+    paths: 
+    - 'html/**'
+name: Deploy nginx
+jobs:
+  deploy:
+    name: Deploy to cluster
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+    - name: Deploy to cluster
+      uses: gnuu-de/kubectl@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: rollout restart deployment/nginx
+    - name: Verify deployment
+      uses: gnuu-de/kubectl@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: get pods -l app=nginx
