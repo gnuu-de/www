@@ -2,6 +2,9 @@ on:
   push: 
     paths: 
     - 'html/**'
+    branches:
+      - main
+      - master
 name: Deploy nginx
 jobs:
   deploy:
