@@ -11,4 +11,4 @@ jobs:
         ref: master
     - uses: filiph/linkcheck@2.0.23
       with:
-        arguments: https://www.gnuu.de
+        arguments: https://www.gnuu.de --connection-failures-as-warnings
