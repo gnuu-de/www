@@ -1,0 +1,398 @@
+Path: eumel.gnuu.de!uucp.germany.net!news.germany.net!not-for-mail
+From: Frank Kloeker <eumel@gnuu.de>
+Newsgroups: germanynet.info
+Subject: [FAQ] News & Mails mit Germany.Net UUcp (GNUU)
+Followup-To: germanynet.hilfe
+Date: Wed, 28 Jun 2000 15:32:21 +0200
+Organization: Germany.Net UUcp (GNUU)
+Lines: 377
+Approved: moderator@germany.net
+Message-ID: <8jdons$ca8$1@news.germany.net>
+NNTP-Posting-Host: eumel.germany.net
+Mime-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+X-Trace: news.germany.net 151.189.93.177 962225724 12616
+X-Complaints-To: news@germany.net
+NNTP-Posting-Date: 28 Jun 2000 20:55:24 GMT
+X-Accept-Language:  de,de-DE,en
+X-Mailer:  Mozilla 4.6 [de] (Win95; I)
+Xref: eumel.gnuu.de germanynet.info:42
+
+[FAQ] News & Mails mit Germany.Net UUcp (GNUU)
+
+Allgemeines:
+============
+Bei germany.net besteht jetzt die Moeglichkeit, News und Mails via UUCP
+over TCP/IP zu beziehen. Bei UUCP werden die Daten in komprimierte
+Batchfiles abgelegt und koennen vom UUCP-Host zum eigenen Rechner ueber
+eine beliebige TCP/IP-Verbindung uebertragen werden. 
+Eine Einwahl bei germany.net ist zur Nutzung dieses Dienstes nicht
+unbedingt notwendig, sondern kann von ueberall erfolgen. Durch die
+Komprimierung der Daten mit verschiedenen Packern
+(compress,gzip,bzip2,szip) verringert sich das Transfervolumen auf ein
+Minimum und spart somit wertvolle Onlinezeit. Fuer den Newszugang stehen
+ca. 5000 Newsgruppen zur Verfuegung
+(ftp://ftp.germany.net/pub/news/uucp/newsgroups). 
+Die UUCP-Mails werden auf eigene Subdomain weitergeleitet. Diese hat die
+Form @<site>.gnuu.de.
+"site" steht dabei fuer eine UUCP-Site, was ueblicherweise die
+germany.net-UserID mit Punkt statt Komma darstellt. Also z.B.
+
+101.3903.gnuu.de
+
+Die UserID kann in der Subdomain auch durch einen Namen belegt werden,
+wie etwa
+
+dragon.gnuu.de
+
+Wenn man einen eigenen Namen statt UserID nutzen will, genuegt eine
+Nachricht an news@germany.net. Es wird dann geprueft, ob der Name
+noch frei ist und in die Konfiguration eingetragen.
+Auf diese Subdomain koennen beliebig viele eMailadressen angelegt
+werden. Diese Mailadressen werden auf dem eigenen Rechner verwaltet. 
+
+
+Accounting:
+===========
+* Anmeldung als User auf http://www.germany.net
+* Freischaltung für UUCP auf http://www.germany.net/online/newsdienste/
+
+
+Systemvoraussetzungen: 
+======================
+* lokales UUCP-System (Taylor_UUCP, Kendra o.a.)
+* lokales News-System (INN, CNEWS, Hamster)
+* lokales Mailsystem (sendmail, exim, Hamster)
+
+Wir beschreiben die Konfiguration an verschiedenen Programmpaketen, die
+unter allen Linux- und Unixderivaten zur Verfuegung stehen. Mit GNUU
+bieten wir ein Baukasten an, bei dem sich jeder die fuer ihn optimale
+Anwendung zusammensetzen kann. Selbst das lokale UUCP-System muss nicht
+unbedingt konfiguriert werden. Die gepackten Batchfiles fuer News stehen
+zum Beispiel auf ftp://uucp.germany.net zur Verfuegung.
+
+
+Taylor_UUCP einrichten:
+========================
+Dazu kann man sich von ftp://ftp.germany.net/pub/unix/uucp-1.06.1.tar.gz
+Taylor_UUCP herunterladen. Nach dem Uebersetzen und der Installation
+sind folgende Einstellungen erforderlich:
+
+Datei call:
+# <Remotesystem> <UserID mit Punkt> <GN-Passwort>
+# Falls ein "Fully qualified domain name" (FQDN) benoetigt wird,
+# kann man user.id.news.germanynet.de verwenden
+# Beispiel: 101.3903.news.germanynet.de
+uucp.germany.net 10x.xxxxxx password
+
+Datei config:
+# <name des lokalen Systems>
+nodename 10x.xxxxxx
+
+Datei port:
+# <Beschreibung der Schnittstellen>
+port    tcp
+        type    tcp
+
+Datei sys:
+# Loginnamen und Passwort aus der Datei 'call' lesen
+call-login      *
+call-password   *
+time            any
+system          uucp.germany.net
+called-login    10x.xxxxxx
+commands        rnews rmail rbsmtp rcsmtp rgsmtp
+command-path    /usr/local/news/bin /usr/bin /usr/local/bin
+port            tcp
+
+Taylor-UUCP laeuft auf allen bekannten Unix/Linux/BSD-Systemen und ist
+frei als Sourcecode verfuegbar.
+Vom UUCP werden die Batchdateien an ein lokales Newssystem verfuettert
+(CNews, Dnews, INN, Hamster).
+
+Nach erfolgter Freischaltung kann man auf
+http://uucp.germany.net/cgi-bin/uucpagent2 seine Site einrichten.
+Als Login/Passwort verwendet man seine GN-UserID mit Punkt und dem
+dazugehoerigen Passwort. 
+Kompression und Batchgroesse sind auf Defaultwerte eingestellt. Die
+maximale Artikelgroesse des newsfeeds und maximale Crosspoints kann man
+ebenfalls variieren. In "Pathexcludes" gehoert der Name des lokalen
+Newssystems rein, wenn man nicht seine eigenen Artikel neu zugestellt
+haben will. In "Hierachien" ist schon ein Minimalfeed fuer die Gruppen
+germanynet.ALL eingerichtet. Weitere Gruppen kann man nach folgender
+Syntax einrichten:
+!*,germanynet.*,\
+de.comm.provider.*,de.comm.chatsystems,\
+de.talk.*,!de.talk.misc,\
+rec.*,@rec.talk.*\
+
+Ausrufezeichen stellen also eine Verneinung dar, Sternchen sind
+Sammelbezeichnung fuer eine Unterhierachie. Das "@" vor einem Pattern
+verhindert das Feeden von crossgeposteten Artikeln in diese Hierarchie.
+Alle Eintraege sind mit Komma getrennt, jede Zeile endet mit einem
+Backslash.
+Es koennen alle Gruppen subscribed werden, die auf
+ftp://ftp.germany.net/pub/news/uucp/newsgroups angegeben sind. Der
+Fullfeed hat unkomprimiert pro Tag eine Groesse von 200 MB, de.ALL pro
+Tag 30 MB.
+Die Konfiguration wird aller 30 Minuten abgeglichen, wenn keine Fehler
+aufgetreten sind. Aller 60 Minuten werden die Batchfiles gepackt
+und fuer 21 Tage zum Abruf zur Verfuegung gestellt.
+
+Nach einer Stunde kann man also schon mal "uucico -s uucp.germany.net"
+aufrufen und sich die ersten Batches runterladen.
+
+
+andere UUCP-Systeme
+==================
+Fuer Windows und Apple Macintosh gibt es von der Firma Kendra
+Electronics Wonderworks ein UUCP-System (http://www.kew.com/kendra).
+Erfahrungen liegen dazu leider noch nicht vor.
+
+
+INN als Newsserver
+==================
+
+INN ist bei manchen Linuxdistributionen schon dabei und brauch nicht
+extra kompiliert werden. Wer sich dennoch die neuesten Sources besorgen
+moechte, kann dies gern auf ftp://ftp.isc.org/ tun. Auf
+ftp://ftp.germany.net/pub/linux/misc sollte sich auch immer das neueste
+Release befinden. Das erforderliche active- und newsgroups-File kann man
+sich von ftp://ftp.germany.net/pub/news/uucp/ runterladen und im
+Unterverzeichnis ~news/db ablegen. Entweder kuerzt man es auf die zu
+lesen Gruppen oder belaest es in der Form und baut sich mit "makehistoy
+-o" eine neue history-Datenbank. 
+
+* inn.conf:
+Hier sind vor allem die verwendeten Host- und Pathnamen wichtig, da
+diese bei eigenen Artikeln im Header erscheinen. Unter server, pathhost
+und fromhost sollte man seinen eigenen FQDN eintragen, z.B.
+101.3903.news.germanynet.de oder 101.3903.gnuu.de, wenn man den
+Mailzugang mit nutzt. Alle anderen Einstellung sind erstmal irrational
+und koennen spaeter geaendert werden.
+
+* newsfeeds:
+Diese Datei ist fuer den Outgoing-Feed zustaendig, also die Artikel, die
+das eigene System wieder verlassen sollen. Neben dem "ME"-Eintrag sollte
+dort mindestes ein Upstream und zwar der zum UUCP-Host vorhanden sein,
+Beispiel:
+uucp.germany.net/101.3903.news.germanynet.de\
+           :*,!junk,!local\
+           :Tf,Wnb,B4096/1024
+Im Outgoingverzeichnis wird dann eine Batchdatei mit dem Namen
+uucp.germany.net angelegt, die wir spaeter mit "sendbatch
+uucp.germany.net" an das UUCP-System verfuettert. Bei "uucico -s
+uucp.germany.net" werden automatisch alle Batches vom Host abgeholt UND
+auch hingeschickt.
+Wichtig ist hier der Pathexclude "101.3903.news.germanynet.de", da sonst
+alle eingehenden Artikel ans lokale Newssystem gegeben werden und auch
+wieder ins Outgoing gebatcht werden (Vorsicht: Gefahr von Dupes!)
+
+* nnrp.access
+In dieser Datei wird festgelegt, wer auf den Newsserver als Client
+zugreifen darf:
+localhost:Read Post:::* 
+
+Dies sollte als Einstellung genuegen. Mit innncheck kann man die
+Konfigurationsfiles checken und mit rc.news den INN starten. Weitere
+Konfiguration und tageliche Pflege des INN wuerden hier zu weit gehen -
+dazu gibt es umfangreiche Informationen in der Dokumentation oder der
+FAQ (news.software.nntp)
+
+
+Hamster als Newsserver
+======================
+
+Dazu gibt es eine Anleitung unter http://www.germany.net/help/news.html
+In grundlegender Funktionsweise werden die Batchfiles per FTP abgeholt
+und an den Hamster weiterverfuettert. Hilfe dazu gibt es auch in der
+neuen News-Hierarchie hamster.ALL :)
+
+
+Sendmail als MTA
+================
+
+Zuerst installiert man das Programm "bsmtp" - mit diesem Programmpaket
+ist das Ausliefern an den lokalen MTA und das Batchen der Mails
+ueberhaupt moeglich. Das Programm befindet sich unter
+ftp://ftp.germany.net/pub/linux/misc/
+BSMTP muss beim lokalen MTA bekanntgemacht werden. Dies geschieht in der
+Datei /etc/mail/linux.mc mit dem Eintrag "MAILER(`bsmtp')dnl" und dem
+anschliessenden Uebersetzen mit dem m4-Konverter:
+m4 /usr/share/sendmail/m4/cf.m4 linux.mc > /etc/sendmail.cf
+Das Feature "mailertable" ist normalerweise schon aktiviert. In die
+Datei /etc/mailertable traegt man ein:
+
+.                       bsmtp:uucp.germany.net
+
+Mit "makemap hash /etc/mail/mailertable.db < /etc/mail/mailertable" und
+Neustart von sendmail sind alle Einstellungen aktiv.
+Wenn jetzt ueber den eigenen Rechner Mails versendet werden, so sollten
+diese in der Queue von bsmtp und nicht in der von smtp landen. 
+Wem das zu kompliziert ist, der kann bei SuSe auch die vorhandene
+UUCP-Konfigurationsdatei verwenden. Dort wird das unkomprimierte
+uucp-dom(rmail) verwendet und man nutzt nur den Vorteil der Batchfiles
+aus. In dieser Konfigurationdatei muss nur (zum Beispiel mit YAST)
+"uucp.germany.net" als UUCP-Smarthost eingetragen werden. Die
+Installation von bsmtp ist so hier nicht notwendig, da bei uucp-dom
+sendmail direkt mit uux kommuniziert - die Mails landen also direkt im
+UUCP-Spool und koennen mit "uucico -s uucp.germany.net" direkt versendet
+werden.
+
+Auf uucp.germany.net sind 4 verschiedene Packer installiert:
+
+compress (rcsmtp)
+gzip (rgsmtp)
+bzip2 (rbsmtp)
+szip (rssmtp)
+
+Die ersten 2 Packer sind standardmaessig bei SuSe dabei. Die anderen 2
+kann man sich unter ftp://ftp.germany.net/pub/linux/misc/ runterladen
+und aequivalent installieren.
+
+Durch den Aufruf "/usr/local/libexec/batcher rgsmtp uucp.germany.net"
+werden die Mails bei BSMTP aus der Queue in Batchfiles gepackt und so
+zum Versand vorbereitet.
+
+
+exim als MTA (von Sven Gottwald)
+================================
+
+Empfang von e-mail
+~~~~~~~~~~~~~~~~~~
+
+Ich gehe davon aus, daß exim bereits voll funktionsfähig installiert
+ist. Eine Installationsbeschreibung von exim würde den Rahmen dieses
+Textes sprengen ;)
+
+Als erstes muß ein symbolischer link auf das exim-binary mit dem Namen
+'rsmtp' erstellt werden. War auf der box vorher schon ein anderer MTA
+installiert, der nicht sauber entfernt wurde, kann es sein, daß
+bereits ein rsmtp-binary existiert -- das muß natürlich vorher
+gelöscht werden. [AFAIK wird bei exim's "make install" rsmtp nicht
+automatisch mit eingerichtet.]
+
+Wenn exim z.B. nach /usr/lib/exim/bin/ installiert wurde, sieht der
+Befehl dazu üblicherweise so aus:
+
+ln -s /usr/lib/exim/bin/exim /usr/lib/exim/bin/rsmtp
+
+Nicht komprimierte mail kann nun schon empfangen werden, es muß uuxqt
+nur noch gestattet werden rsmtp auch auszuführen.  Üblicherweise fügt
+man hierzu "/usr/lib/exim/bin/" dem "command-path" in /etc/uucp/sys
+zu, und erweitert "commands" um den Befehl "rsmtp". Fertig!
+
+Sollen z.B. mit bzip2 komprimierte mails empfangen werden, muß noch
+ein kleines Script zu diesem Zweck erstellt werden. Das Script sieht
+für bzip2 komprimierte mail folgendermaßen aus:
+
+#!/bin/sh
+/usr/bin/bunzip2 | /usr/sbin/rsmtp
+
+Das ganze speichert man üblichwerweise nach /usr/local/sbin/rbsmtp ab
+(der Pfad ist frei wählbar, der Dateiname ist durch die Kompressions-
+methode s.u. vorgegeben). Nun muß man uuxqt auch noch erlauben diese
+Datei auszuführen.
+
+Danach sehen die entsprechenden Anweisungen in /etc/uucp/sys so aus:
+
+| system          uucp.germany.net
+| command-path    /usr/lib/news/bin/ /usr/bin /usr/local/sbin
+| commands        rnews rsmtp rbsmtp
+
+Andere Kompressionsalgorithmen können in gleicher Weise hinzugefügt
+werden, dabei unterscheidet sich nur der Dateiname des scripts (und
+statt bunzip muß natürlich ein anderer Entpacker verwendet werden ;)
+-- für jeden Packer sein eigenes Script:
+
+compress (rcsmtp)
+gzip (rgsmtp)
+bzip2 (rbsmtp)
+szip (rssmtp)
+
+Die Kompression läßt sich via Web-Interface wählen.
+
+
+Versand von e-mail
+~~~~~~~~~~~~~~~~~~
+Die andere Richtung ist eigentlich auch ganz einfach einzurichten. Als
+erstes muß der Systemname exim bekannt gemacht werden, damit mails an
+user@<site>.gnuu.de nicht wieder nach germany.net weitergeleitet
+werden:
+
+| # main
+| local_domains = localhost:<site>.gnuu.de
+
+Nun zuerst wieder die Variante ohne Komprimierung:
+
+| # transports
+| uucp_rsmtp:
+|   driver = pipe
+|   batch = all
+|   bsmtp = all
+|   bsmtp_helo = true
+|   command = "/usr/bin/uux - -r $host!rsmtp"
+|   pipe_as_creator = true
+|   prefix = ""
+|   timeout = 10m
+|
+| # routers
+| smarthost:
+|   driver = domainlist
+|   transport = uucp_rsmtp
+|   route_list= "* uucp.germany.net"
+
+und nun die Variante mit bzip2-Komprimierung:
+
+| # transports
+| uucp_rbsmtp:
+|   driver = pipe
+|   batch = all
+|   bsmtp = all
+|   bsmtp_helo = true
+|   command = "/usr/local/sbin/rbexim $host"
+|   log_fail_output = true
+|   pipe_as_creator = true
+|   prefix = ""
+|   timeout = 10m
+|
+| # routers
+| smarthost:
+|   driver = domainlist
+|   transport = uucp_rbsmtp
+|   route_list= "* uucp.germany.net"
+
+Es fehlt natürlich noch /usr/local/sbin/rbexim, das sieht so aus:
+
+| #!/bin/sh
+| PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/usr/sbin
+| /usr/bin/bzip2 | /usr/bin/uux - -r $1!rbsmtp
+
+Andere Kompressionsmethoden können nach obigem Muster hinzugefügt
+werden. ;)
+
+
+Empfang/Versand der Batches
+===========================
+
+Nach dem Herstellen der Verbindung zum Internet werden sie genau wie
+die Newsbatches mit "uucico -s uucp.germany.net" uebertragen.
+Einkommende Mailbatches werden von den mitgelieferten transmitter-
+Programmen an den MTA bzw. den Batcher weitergereicht. Dort koennen
+sie weiter von einem MDA wie procmail verarbeitet oder in normale
+Mailfaecher einsortiert werden.
+Die Mailbatches werden erst beim Einloggen ins UUCP-System gebatcht und
+stehen deshalb nicht per FTP zur Verfuegung.
+
+Fragen zur Konfiguration koennen am besten in der Newsgruppe
+germanynet.hilfe gestellt werden. Bitte genaue Fehlerbeschreibung
+angeben und die Logeintraege des jeweiligen Programms begutachten.
+
+
+-- 
+=================================================
+Frank  Kloeker at Network Operating Center N.O.C.
+>>   Administration IRC & NEWS  germany.net   <<
+>> http://noc.germany.net http://www.eumel.de <<
+
