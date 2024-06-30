@@ -1,0 +1,13 @@
+on: workflow_call
+name: Linkcheck
+jobs:
+  linkcheck:
+    name: Deploy to cluster
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+    - uses: filiph/linkcheck@2.0.23
+      with:
+        arguments: https://www.gnuu.de
